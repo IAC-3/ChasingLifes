@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.ChasingLifes" parent="Base.Theme.ChasingLifes" />
+
+    <style name="Theme.ChasingLifes.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ChasingLifes.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

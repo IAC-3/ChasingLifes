@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_identified"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="Identificati" />
+    <item
+        android:id="@+id/navigation_unidentified"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="Non Identificati" />
+    <item
+        android:id="@+id/navigation_missing"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Dispersi" />
+    <item
+        android:id="@+id/navigation_deceased"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Deceduti" />
+</menu>
