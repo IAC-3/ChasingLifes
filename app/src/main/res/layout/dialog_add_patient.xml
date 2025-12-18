@@ -1,65 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aggiungi Paziente"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+    <!-- Contenitore per i campi Nome/Cognome -->
     <LinearLayout
+        android:id="@+id/identified_patient_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/patient_name"
+            android:id="@+id/patient_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="Nome" />
 
         <EditText
-            android:id="@+id/patient_surname"
+            android:id="@+id/patient_surname_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:hint="Cognome" />
+    </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/unidentified_patient_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Paziente non identificato" />
+    <!-- Campo per i segni particolari (inizialmente nascosto) -->
+    <EditText
+        android:id="@+id/distinguishing_marks_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Segni particolari"
+        android:visibility="gone" />
 
-        <EditText
-            android:id="@+id/distinguishing_marks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Segni particolari"
-            android:visibility="gone" />
+    <CheckBox
+        android:id="@+id/unidentified_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Paziente non identificato" />
 
-        <Button
-            android:id="@+id/add_photo_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Aggiungi foto" />
-
-        <ImageView
-            android:id="@+id/patient_photo_preview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone" />
+    <!-- Contenitore per le condizioni (per mostrarlo/nasconderlo facilmente) -->
+    <LinearLayout
+        android:id="@+id/conditions_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/patient_conditions"
+            android:id="@+id/conditions_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="Condizioni" />
 
-        <CheckBox
-            android:id="@+id/deceased_patient_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Paziente deceduto" />
-
     </LinearLayout>
-</ScrollView>
+
+    <CheckBox
+        android:id="@+id/deceased_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Paziente deceduto" />
+
+</LinearLayout>

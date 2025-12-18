@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity
     public void onNavigateToRegister() {
         getSupportFragmentManager().beginTransaction()
             .replace(R.id.fragment_container, new RegisterFragment())
-            .addToBackStack(null) // Permette di tornare al login con il tasto back
+            .addToBackStack(null)
             .commit();
     }
 
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity
                     Toast.makeText(this, "Credenziali non valide", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Accesso effettuato!", Toast.LENGTH_SHORT).show();
-                    launchNextActivity(user.isOperator());
+                    launchNextActivity(user.isOperator(), user.getUsername()); // Passa anche l'username
                 }
             });
         });
@@ -88,13 +88,14 @@ public class LoginActivity extends AppCompatActivity
         });
     }
 
-    private void launchNextActivity(boolean isOperator) {
+    private void launchNextActivity(boolean isOperator, String username) {
         Intent intent;
         if (isOperator) {
             intent = new Intent(this, OperatorActivity.class);
         } else {
             intent = new Intent(this, MainActivity.class);
         }
+        intent.putExtra("USERNAME", username); // Aggiungo l'username all'intent
         startActivity(intent);
         finish();
     }

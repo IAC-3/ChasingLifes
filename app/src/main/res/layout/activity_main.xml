@@ -9,8 +9,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -19,7 +18,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Contenitore pre-sessione -->
     <LinearLayout
+        android:id="@+id/pre_session_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -32,5 +33,25 @@
             android:text="Join a Session" />
 
     </LinearLayout>
+
+    <!-- Contenitore post-sessione (invisibile di default) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/patients_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:visibility="visible"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        app:menu="@menu/bottom_nav_menu"
+        tools:visibility="visible"/>
+
+    <!-- FAB RIMOSSO -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

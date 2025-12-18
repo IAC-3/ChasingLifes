@@ -19,34 +19,37 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Contenitore pre-sessione -->
     <LinearLayout
+        android:id="@+id/pre_session_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/generate_session_button"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="Generate Session" />
 
-            <Button
-                android:id="@+id/generate_room_button"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Generate Session" />
-
-            <Button
-                android:id="@+id/join_session_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Join a Session" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/join_session_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Join a Session" />
 
     </LinearLayout>
+
+    <!-- Contenitore post-sessione (invisibile di default) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/patients_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
