@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/patient_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome" />
+
+        <EditText
+            android:id="@+id/patient_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cognome" />
+
+        <CheckBox
+            android:id="@+id/unidentified_patient_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paziente non identificato" />
+
+        <EditText
+            android:id="@+id/distinguishing_marks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Segni particolari"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/add_photo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Aggiungi foto" />
+
+        <ImageView
+            android:id="@+id/patient_photo_preview"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/patient_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Condizioni" />
+
+        <CheckBox
+            android:id="@+id/deceased_patient_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paziente deceduto" />
+
+    </LinearLayout>
+</ScrollView>
