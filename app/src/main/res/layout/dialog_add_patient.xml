@@ -3,15 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="24dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aggiungi Paziente"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-    <!-- Contenitore per i campi Nome/Cognome -->
+    <!-- Contenitore per i campi Nome/Cognome (può essere nascosto) -->
     <LinearLayout
         android:id="@+id/identified_patient_container"
         android:layout_width="match_parent"
@@ -22,7 +18,6 @@
             android:id="@+id/patient_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:hint="Nome" />
 
         <EditText
@@ -33,14 +28,13 @@
             android:hint="Cognome" />
     </LinearLayout>
 
-    <!-- Campo per i segni particolari (inizialmente nascosto) -->
+    <!-- Campo per i segni particolari (SEMPRE VISIBILE) -->
     <EditText
         android:id="@+id/distinguishing_marks_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Segni particolari"
-        android:visibility="gone" />
+        android:layout_marginTop="8dp"
+        android:hint="Segni particolari" />
 
     <CheckBox
         android:id="@+id/unidentified_checkbox"
@@ -49,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:text="Paziente non identificato" />
 
-    <!-- Contenitore per le condizioni (per mostrarlo/nasconderlo facilmente) -->
+    <!-- Contenitore per le condizioni -->
     <LinearLayout
         android:id="@+id/conditions_container"
         android:layout_width="match_parent"

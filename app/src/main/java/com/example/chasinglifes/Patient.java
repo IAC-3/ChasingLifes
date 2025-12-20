@@ -11,9 +11,12 @@ import java.io.Serializable;
 @Entity(tableName = "patients",
         foreignKeys = {
             @ForeignKey(entity = Session.class, parentColumns = "code", childColumns = "sessionCode", onDelete = ForeignKey.CASCADE),
-            @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "operatorUsername", onDelete = ForeignKey.CASCADE)
+            // L'operatore che ha inserito/modificato il paziente
+            @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "operatorUsername", onDelete = ForeignKey.SET_NULL),
+            // L'utente che ha segnalato il disperso
+            @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "reporterUsername", onDelete = ForeignKey.SET_NULL)
         },
-        indices = {@Index("sessionCode"), @Index("operatorUsername")}
+        indices = {@Index("sessionCode"), @Index("operatorUsername"), @Index("reporterUsername")}
 )
 public class Patient implements Serializable {
 
@@ -22,16 +25,16 @@ public class Patient implements Serializable {
 
     private String sessionCode;
     private String operatorUsername;
+    private String reporterUsername; // NUOVO CAMPO
 
     private String name;
     private String surname;
     private String distinguishingMarks;
     private String conditions;
     
-    // NUOVO MODELLO DATI
     @NonNull
-    private String status; // Sarà "IDENTIFIED", "UNIDENTIFIED", "MISSING"
-    private boolean isDeceased; // Campo separato per lo stato di decesso
+    private String status;
+    private boolean isDeceased;
 
     public Patient() {}
 
@@ -45,6 +48,9 @@ public class Patient implements Serializable {
 
     public String getOperatorUsername() { return operatorUsername; }
     public void setOperatorUsername(String operatorUsername) { this.operatorUsername = operatorUsername; }
+
+    public String getReporterUsername() { return reporterUsername; }
+    public void setReporterUsername(String reporterUsername) { this.reporterUsername = reporterUsername; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

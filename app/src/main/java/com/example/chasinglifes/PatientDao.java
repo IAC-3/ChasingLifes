@@ -21,21 +21,16 @@ public interface PatientDao {
     @Delete
     void delete(Patient patient);
 
-    // Query generica per la sessione (usata dall'utente)
     @Query("SELECT * FROM patients WHERE sessionCode = :sessionCode ORDER BY id DESC")
     List<Patient> getPatientsBySession(String sessionCode);
 
-    // --- NUOVO METODO SPECIFICO PER L'OPERATORE ---
-    /**
-     * Seleziona solo i pazienti (non dispersi) inseriti da un operatore specifico in una data sessione.
-     */
     @Query("SELECT * FROM patients WHERE sessionCode = :sessionCode AND operatorUsername = :operatorUsername AND status != 'MISSING' ORDER BY id DESC")
     List<Patient> getOperatorPatientsForSession(String sessionCode, String operatorUsername);
 
+    // --- METODI DI RICERCA RIPRISTINATI ---
+    @Query("SELECT * FROM patients WHERE status = 'MISSING' AND name = :name AND surname = :surname")
+    List<Patient> findMissingByExactName(String name, String surname);
 
-    @Query("SELECT * FROM patients WHERE status = 'MISSING' AND name LIKE :name AND surname LIKE :surname")
-    List<Patient> findMissingByName(String name, String surname);
-
-    @Query("SELECT * FROM patients WHERE status = 'MISSING' AND distinguishingMarks LIKE :marks")
-    List<Patient> findMissingByMarks(String marks);
+    @Query("SELECT * FROM patients WHERE status = 'MISSING' AND distinguishingMarks = :marks")
+    List<Patient> findMissingByExactMarks(String marks);
 }

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private final List<Patient> displayedPatients = new ArrayList<>();
 
     private String currentSessionCode;
+    private String currentUserUsername;
     private Menu optionsMenu;
 
     @Override
@@ -50,7 +51,9 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Utente");
+        
+        currentUserUsername = getIntent().getStringExtra("USERNAME");
+        setTitle("Utente: " + currentUserUsername);
 
         db = AppDatabase.getDatabase(this);
 
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         preSessionContainer.setVisibility(View.GONE);
         patientsRecyclerView.setVisibility(View.VISIBLE);
         bottomNavigation.setVisibility(View.VISIBLE);
+        invalidateOptionsMenu();
         loadPatients();
     }
 
@@ -140,6 +144,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.optionsMenu = menu;
+        // La visibilità del menu viene gestita solo quando si seleziona una scheda
         menu.findItem(R.id.action_add_missing_person).setVisible(false);
         return true;
     }
@@ -162,10 +167,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMissingPersonAdded(String name, String surname, String marks) {
-        if (name.isEmpty() || surname.isEmpty()) {
-            Toast.makeText(this, "Nome e cognome sono obbligatori", Toast.LENGTH_SHORT).show();
-            return;
-        }
         Patient missingPerson = new Patient();
         missingPerson.setSessionCode(currentSessionCode);
         missingPerson.setName(name);
@@ -173,10 +174,13 @@ public class MainActivity extends AppCompatActivity
         missingPerson.setDistinguishingMarks(marks);
         missingPerson.setStatus("MISSING");
         missingPerson.setDeceased(false);
+        missingPerson.setReporterUsername(currentUserUsername);
+
         executor.execute(() -> {
             db.patientDao().insert(missingPerson);
             runOnUiThread(this::loadPatients);
         });
+
         Toast.makeText(this, "Persona scomparsa aggiunta.", Toast.LENGTH_SHORT).show();
     }
 
@@ -190,10 +194,13 @@ public class MainActivity extends AppCompatActivity
         final EditText nameInput = new EditText(this);
         nameInput.setHint("Nome");
         layout.addView(nameInput);
+
         final EditText surnameInput = new EditText(this);
         surnameInput.setHint("Cognome");
         layout.addView(surnameInput);
+
         builder.setView(layout);
+
         builder.setPositiveButton("Identifica", (dialog, which) -> {
             String name = nameInput.getText().toString().trim();
             String surname = surnameInput.getText().toString().trim();
@@ -211,6 +218,18 @@ public class MainActivity extends AppCompatActivity
         });
         builder.setNegativeButton("Annulla", null);
         builder.show();
+    }
+
+    @Override
+    public void onSubscribePatient(Patient patient) {
+        if (currentUserUsername == null) return;
+        
+        Subscription newSubscription = new Subscription(currentUserUsername, patient.getId());
+        executor.execute(() -> {
+            db.subscriptionDao().insert(newSubscription);
+        });
+
+        Toast.makeText(this, "Ora segui gli aggiornamenti per: " + patient.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override public void onEditPatient(Patient p) {}
