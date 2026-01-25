@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity
     private String currentSessionCode;
     private String currentUserUsername;
     private Menu optionsMenu;
+    private FilterType currentFilter = FilterType.UNIDENTIFIED;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void filterPatients(FilterType filter) {
+        this.currentFilter = filter;
         displayedPatients.clear();
         switch (filter) {
             case IDENTIFIED:
@@ -141,11 +145,64 @@ public class MainActivity extends AppCompatActivity
         patientAdapter.notifyDataSetChanged();
     }
 
+    private void filterBySearchQuery(String query) {
+        List<Patient> results = new ArrayList<>();
+        if (query.isEmpty()) {
+            filterPatients(this.currentFilter);
+            return;
+        }
+
+        String lowerCaseQuery = query.toLowerCase();
+        for (Patient patient : allPatients) {
+            if ((patient.getName() != null && patient.getName().toLowerCase().contains(lowerCaseQuery)) ||
+                    (patient.getSurname() != null && patient.getSurname().toLowerCase().contains(lowerCaseQuery)) ||
+                    (patient.getDistinguishingMarks() != null && patient.getDistinguishingMarks().toLowerCase().contains(lowerCaseQuery))) {
+                results.add(patient);
+            }
+        }
+
+        displayedPatients.clear();
+        displayedPatients.addAll(results);
+        patientAdapter.notifyDataSetChanged();
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.optionsMenu = menu;
         menu.findItem(R.id.action_add_missing_person).setVisible(false);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        this.searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("Cerca per nome, cognome...");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterBySearchQuery(newText);
+                return true;
+            }
+        });
+
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                filterPatients(currentFilter);
+                return true;
+            }
+        });
+
         return true;
     }
 
