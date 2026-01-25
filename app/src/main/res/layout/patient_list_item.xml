@@ -82,12 +82,20 @@
                 android:contentDescription="Identifica Paziente"/>
 
             <ImageView
-                android:id="@+id/subscribe_patient_button"
+                android:id="@+id/add_contact_button"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
-                android:src="@android:drawable/ic_notification_overlay"
-                android:contentDescription="Segui Paziente"/>
+                android:src="@android:drawable/ic_menu_add"
+                android:contentDescription="Aggiungi Contatto"/>
+
+            <ImageView
+                android:id="@+id/view_contacts_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:src="@android:drawable/ic_menu_search"
+                android:contentDescription="Visualizza Contatti"/>
 
         </LinearLayout>
 

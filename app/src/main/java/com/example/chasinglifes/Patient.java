@@ -32,6 +32,7 @@ public class Patient implements Serializable {
     private String distinguishingMarks;
     private String conditions;
     private String hospital;
+    private String contacts;
 
     @NonNull
     private String status;
@@ -67,6 +68,9 @@ public class Patient implements Serializable {
 
     public String getHospital() { return hospital; }
     public void setHospital(String hospital) { this.hospital = hospital; }
+
+    public String getContacts() { return contacts; }
+    public void setContacts(String contacts) { this.contacts = contacts; }
 
     @NonNull
     public String getStatus() { return status; }

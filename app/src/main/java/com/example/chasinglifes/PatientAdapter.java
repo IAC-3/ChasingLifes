@@ -18,7 +18,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         void onEditPatient(Patient patient);
         void onDeletePatient(Patient patient);
         void onIdentifyPatient(Patient patient);
-        void onSubscribePatient(Patient patient);
+        void onAddContact(Patient patient);
+        void onViewContacts(Patient patient);
     }
 
     private final List<Patient> patientList;
@@ -42,7 +43,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
         Patient patient = patientList.get(position);
 
-        // Logica di visualizzazione (invariata)
+        // Logica di visualizzazione
         StringBuilder topLineBuilder = new StringBuilder();
         if (!TextUtils.isEmpty(patient.getName()) || !TextUtils.isEmpty(patient.getSurname())) {
             topLineBuilder.append(patient.getName()).append(" ").append(patient.getSurname());
@@ -59,7 +60,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
             holder.patientConditions.setText(patient.getConditions());
         }
 
-        // Mostra l'operatore solo nella vista utente
         if (!isOperatorView && patient.getOperatorUsername() != null) {
             holder.operatorUsername.setText("Inserito da: " + patient.getOperatorUsername());
             holder.operatorUsername.setVisibility(View.VISIBLE);
@@ -69,20 +69,25 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
 
         holder.patientPhoto.setImageResource(R.mipmap.ic_launcher);
 
-        // Logica dei pulsanti (invariata)
+        // Logica dei pulsanti
         if (listener != null) {
             if (isOperatorView) {
                 holder.editButton.setVisibility(View.VISIBLE);
                 holder.deleteButton.setVisibility(View.VISIBLE);
+                holder.viewContactsButton.setVisibility(View.VISIBLE);
                 holder.identifyButton.setVisibility(View.GONE);
-                holder.subscribeButton.setVisibility(View.GONE);
+                holder.addContactButton.setVisibility(View.GONE);
+
                 holder.editButton.setOnClickListener(v -> listener.onEditPatient(patient));
                 holder.deleteButton.setOnClickListener(v -> listener.onDeletePatient(patient));
+                holder.viewContactsButton.setOnClickListener(v -> listener.onViewContacts(patient));
             } else { // User View
                 holder.editButton.setVisibility(View.GONE);
                 holder.deleteButton.setVisibility(View.GONE);
-                holder.subscribeButton.setVisibility(View.VISIBLE);
-                holder.subscribeButton.setOnClickListener(v -> listener.onSubscribePatient(patient));
+                holder.addContactButton.setVisibility(View.VISIBLE);
+                holder.viewContactsButton.setVisibility(View.GONE);
+
+                holder.addContactButton.setOnClickListener(v -> listener.onAddContact(patient));
 
                 if ("UNIDENTIFIED".equals(patient.getStatus())) {
                     holder.identifyButton.setVisibility(View.VISIBLE);
@@ -95,7 +100,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
             holder.editButton.setVisibility(View.GONE);
             holder.deleteButton.setVisibility(View.GONE);
             holder.identifyButton.setVisibility(View.GONE);
-            holder.subscribeButton.setVisibility(View.GONE);
+            holder.addContactButton.setVisibility(View.GONE);
+            holder.viewContactsButton.setVisibility(View.GONE);
         }
     }
 
@@ -103,19 +109,20 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     public int getItemCount() { return patientList.size(); }
 
     static class PatientViewHolder extends RecyclerView.ViewHolder {
-        ImageView patientPhoto, editButton, deleteButton, identifyButton, subscribeButton;
-        TextView patientNameOrMarks, patientConditions, operatorUsername; // Aggiunto operatorUsername
+        ImageView patientPhoto, editButton, deleteButton, identifyButton, addContactButton, viewContactsButton;
+        TextView patientNameOrMarks, patientConditions, operatorUsername;
 
         public PatientViewHolder(@NonNull View itemView) {
             super(itemView);
             patientPhoto = itemView.findViewById(R.id.patient_photo);
             patientNameOrMarks = itemView.findViewById(R.id.patient_name_or_marks);
             patientConditions = itemView.findViewById(R.id.patient_conditions);
-            operatorUsername = itemView.findViewById(R.id.patient_operator_username); // Aggiunto
+            operatorUsername = itemView.findViewById(R.id.patient_operator_username);
             editButton = itemView.findViewById(R.id.edit_patient_button);
             deleteButton = itemView.findViewById(R.id.delete_patient_button);
             identifyButton = itemView.findViewById(R.id.identify_patient_button);
-            subscribeButton = itemView.findViewById(R.id.subscribe_patient_button);
+            addContactButton = itemView.findViewById(R.id.add_contact_button);
+            viewContactsButton = itemView.findViewById(R.id.view_contacts_button);
         }
     }
 }

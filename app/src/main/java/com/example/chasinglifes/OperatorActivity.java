@@ -218,7 +218,20 @@ public class OperatorActivity extends AppCompatActivity
     @Override
     public void onIdentifyPatient(Patient patient) {}
 
-    // Metodo aggiunto per soddisfare l'interfaccia
     @Override
-    public void onSubscribePatient(Patient patient) {}
+    public void onAddContact(Patient patient) {}
+
+    @Override
+    public void onViewContacts(Patient patient) {
+        if (patient.getContacts() == null || patient.getContacts().trim().isEmpty()) {
+            Toast.makeText(this, "Nessun contatto disponibile.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Contatti per " + (patient.getName() != null ? patient.getName() : "paziente"));
+        builder.setMessage(patient.getContacts());
+        builder.setPositiveButton("OK", null);
+        builder.show();
+    }
 }

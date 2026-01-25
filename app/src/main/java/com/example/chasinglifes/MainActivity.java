@@ -1,5 +1,6 @@
 package com.example.chasinglifes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -144,19 +145,48 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         this.optionsMenu = menu;
-        // La visibilità del menu viene gestita solo quando si seleziona una scheda
         menu.findItem(R.id.action_add_missing_person).setVisible(false);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_add_missing_person) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_add_missing_person) {
             new AddMissingPersonDialogFragment().show(getSupportFragmentManager(), "AddMissingPersonDialog");
+            return true;
+        } else if (itemId == R.id.action_delete_account) {
+            showDeleteConfirmationDialog();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Conferma Cancellazione")
+                .setMessage("Sei sicuro di voler cancellare il tuo account? Questa azione è irreversibile.")
+                .setPositiveButton("Sì", (dialog, which) -> deleteAccount())
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void deleteAccount() {
+        executor.execute(() -> {
+            User user = db.userDao().findByUsername(currentUserUsername);
+            if (user != null) {
+                db.userDao().delete(user);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Account cancellato con successo.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                });
+            }
+        });
+    }
+
 
     private void updateMenuVisibility(int selectedItemId) {
         if (optionsMenu != null) {
@@ -221,16 +251,66 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSubscribePatient(Patient patient) {
-        if (currentUserUsername == null) return;
+    public void onAddContact(Patient patient) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Aggiungi Contatto");
 
-        Subscription newSubscription = new Subscription(currentUserUsername, patient.getId());
-        executor.execute(() -> {
-            db.subscriptionDao().insert(newSubscription);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(50, 20, 50, 20);
+
+        final EditText roleInput = new EditText(this);
+        roleInput.setHint("Ruolo (es: Moglie)");
+        layout.addView(roleInput);
+
+        final EditText nameInput = new EditText(this);
+        nameInput.setHint("Nome Cognome (es: Gina Rossi)");
+        layout.addView(nameInput);
+
+        final EditText contactInput = new EditText(this);
+        contactInput.setHint("Contatto (es: 3456789001)");
+        contactInput.setInputType(InputType.TYPE_CLASS_PHONE);
+        layout.addView(contactInput);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Salva", (dialog, which) -> {
+            String role = roleInput.getText().toString().trim();
+            String name = nameInput.getText().toString().trim();
+            String contact = contactInput.getText().toString().trim();
+
+            if (!role.isEmpty() && !name.isEmpty() && !contact.isEmpty()) {
+                String newContactInfo = "Ruolo: " + role + "\nNome Cognome: " + name + "\nContatto: " + contact;
+                String existingContacts = patient.getContacts() != null ? patient.getContacts() : "";
+                String newContacts = existingContacts.isEmpty() ? newContactInfo : existingContacts + "\n\n" + newContactInfo;
+                patient.setContacts(newContacts);
+
+                executor.execute(() -> {
+                    db.patientDao().update(patient);
+                    runOnUiThread(this::loadPatients);
+                });
+                Toast.makeText(this, "Contatto aggiunto.", Toast.LENGTH_SHORT).show();
+            }
         });
+        builder.setNegativeButton("Annulla", (dialog, which) -> dialog.cancel());
 
-        Toast.makeText(this, "Ora segui gli aggiornamenti per: " + patient.getName(), Toast.LENGTH_SHORT).show();
+        builder.show();
     }
+
+    @Override
+    public void onViewContacts(Patient patient) {
+        if (patient.getContacts() == null || patient.getContacts().trim().isEmpty()) {
+            Toast.makeText(this, "Nessun contatto disponibile.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Contatti per " + (patient.getName() != null ? patient.getName() : "paziente"));
+        builder.setMessage(patient.getContacts());
+        builder.setPositiveButton("OK", null);
+        builder.show();
+    }
+
 
     @Override public void onEditPatient(Patient p) {}
     @Override public void onDeletePatient(Patient p) {}
