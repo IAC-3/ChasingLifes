@@ -97,6 +97,7 @@ public class AddPatientDialogFragment extends DialogFragment {
             p.setSurname(((EditText) view.findViewById(R.id.patient_surname_input)).getText().toString().trim());
         }
         p.setDistinguishingMarks(((EditText) view.findViewById(R.id.distinguishing_marks_input)).getText().toString().trim());
+        p.setHospital(((EditText) view.findViewById(R.id.hospital_input)).getText().toString().trim());
         return p;
     }
 
@@ -105,6 +106,7 @@ public class AddPatientDialogFragment extends DialogFragment {
         ((EditText) view.findViewById(R.id.patient_surname_input)).setText(patientToEdit.getSurname());
         ((EditText) view.findViewById(R.id.distinguishing_marks_input)).setText(patientToEdit.getDistinguishingMarks());
         ((EditText) view.findViewById(R.id.conditions_input)).setText(patientToEdit.getConditions());
+        ((EditText) view.findViewById(R.id.hospital_input)).setText(patientToEdit.getHospital());
         CheckBox unidentCheckbox = view.findViewById(R.id.unidentified_checkbox);
         unidentCheckbox.setChecked("UNIDENTIFIED".equals(patientToEdit.getStatus()));
         CheckBox decCheckbox = view.findViewById(R.id.deceased_checkbox);

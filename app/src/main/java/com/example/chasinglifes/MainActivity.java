@@ -24,14 +24,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-public class MainActivity extends AppCompatActivity 
-    implements JoinSessionDialogFragment.JoinSessionDialogListener, 
-               PatientAdapter.PatientAdapterListener,
-               AddMissingPersonDialogFragment.AddMissingPersonListener {
+public class MainActivity extends AppCompatActivity
+        implements JoinSessionDialogFragment.JoinSessionDialogListener,
+        PatientAdapter.PatientAdapterListener,
+        AddMissingPersonDialogFragment.AddMissingPersonListener {
 
     private AppDatabase db;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    
+
     private LinearLayout preSessionContainer;
     private RecyclerView patientsRecyclerView;
     private BottomNavigationView bottomNavigation;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
         currentUserUsername = getIntent().getStringExtra("USERNAME");
         setTitle("Utente: " + currentUserUsername);
 
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSubscribePatient(Patient patient) {
         if (currentUserUsername == null) return;
-        
+
         Subscription newSubscription = new Subscription(currentUserUsername, patient.getId());
         executor.execute(() -> {
             db.subscriptionDao().insert(newSubscription);

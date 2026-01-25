@@ -52,7 +52,7 @@
 
         <!-- Contenitore per le azioni -->
         <LinearLayout
-            android:id="@+id/actions_container" 
+            android:id="@+id/actions_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -80,7 +80,7 @@
                 android:layout_marginTop="8dp"
                 android:src="@android:drawable/ic_menu_myplaces"
                 android:contentDescription="Identifica Paziente"/>
-                
+
             <ImageView
                 android:id="@+id/subscribe_patient_button"
                 android:layout_width="32dp"

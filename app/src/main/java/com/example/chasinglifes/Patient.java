@@ -10,11 +10,11 @@ import java.io.Serializable;
 
 @Entity(tableName = "patients",
         foreignKeys = {
-            @ForeignKey(entity = Session.class, parentColumns = "code", childColumns = "sessionCode", onDelete = ForeignKey.CASCADE),
-            // L'operatore che ha inserito/modificato il paziente
-            @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "operatorUsername", onDelete = ForeignKey.SET_NULL),
-            // L'utente che ha segnalato il disperso
-            @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "reporterUsername", onDelete = ForeignKey.SET_NULL)
+                @ForeignKey(entity = Session.class, parentColumns = "code", childColumns = "sessionCode", onDelete = ForeignKey.CASCADE),
+                // L'operatore che ha inserito/modificato il paziente
+                @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "operatorUsername", onDelete = ForeignKey.SET_NULL),
+                // L'utente che ha segnalato il disperso
+                @ForeignKey(entity = User.class, parentColumns = "username", childColumns = "reporterUsername", onDelete = ForeignKey.SET_NULL)
         },
         indices = {@Index("sessionCode"), @Index("operatorUsername"), @Index("reporterUsername")}
 )
@@ -31,7 +31,8 @@ public class Patient implements Serializable {
     private String surname;
     private String distinguishingMarks;
     private String conditions;
-    
+    private String hospital;
+
     @NonNull
     private String status;
     private boolean isDeceased;
@@ -63,6 +64,9 @@ public class Patient implements Serializable {
 
     public String getConditions() { return conditions; }
     public void setConditions(String conditions) { this.conditions = conditions; }
+
+    public String getHospital() { return hospital; }
+    public void setHospital(String hospital) { this.hospital = hospital; }
 
     @NonNull
     public String getStatus() { return status; }

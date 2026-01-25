@@ -24,7 +24,7 @@
             android:id="@+id/patient_surname_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android.layout_marginTop="8dp"
             android:hint="Cognome" />
     </LinearLayout>
 
@@ -35,6 +35,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Segni particolari" />
+
+    <EditText
+        android:id="@+id/hospital_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Struttura Ospedaliera" />
 
     <CheckBox
         android:id="@+id/unidentified_checkbox"

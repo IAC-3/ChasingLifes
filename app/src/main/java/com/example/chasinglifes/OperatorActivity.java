@@ -20,11 +20,11 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class OperatorActivity extends AppCompatActivity 
-    implements JoinSessionDialogFragment.JoinSessionDialogListener, 
-               AddPatientDialogFragment.AddPatientDialogListener,
-               PatientAdapter.PatientAdapterListener,
-               MatchFoundDialogFragment.MatchFoundListener {
+public class OperatorActivity extends AppCompatActivity
+        implements JoinSessionDialogFragment.JoinSessionDialogListener,
+        AddPatientDialogFragment.AddPatientDialogListener,
+        PatientAdapter.PatientAdapterListener,
+        MatchFoundDialogFragment.MatchFoundListener {
 
     private AppDatabase db;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -45,7 +45,7 @@ public class OperatorActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
         operatorUsername = getIntent().getStringExtra("USERNAME");
         setTitle("Operatore: " + operatorUsername);
 
@@ -98,7 +98,7 @@ public class OperatorActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_add_patient) {
             AddPatientDialogFragment.newInstance(currentSessionCode, operatorUsername, null)
-                .show(getSupportFragmentManager(), "AddPatientDialog");
+                    .show(getSupportFragmentManager(), "AddPatientDialog");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -116,7 +116,7 @@ public class OperatorActivity extends AppCompatActivity
                         insertNewPatient(patientData, false);
                     } else {
                         MatchFoundDialogFragment.newInstance(matches, patientData)
-                            .show(getSupportFragmentManager(), "MatchFoundDialog");
+                                .show(getSupportFragmentManager(), "MatchFoundDialog");
                     }
                 });
             });
@@ -159,14 +159,14 @@ public class OperatorActivity extends AppCompatActivity
         executor.execute(() -> {
             if(isUpdate) db.patientDao().update(patient);
             else db.patientDao().insert(patient);
-            
+
             runOnUiThread(() -> {
                 Toast.makeText(this, isUpdate ? "Paziente aggiornato!" : "Paziente aggiunto!", Toast.LENGTH_SHORT).show();
                 loadPatients();
             });
         });
     }
-    
+
     private void generateAndSaveSession() {
         String sessionCode = UUID.randomUUID().toString().substring(0, 8);
         executor.execute(() -> {
