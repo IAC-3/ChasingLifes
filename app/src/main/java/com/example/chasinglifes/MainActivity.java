@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity
         bottomNavigation.setVisibility(View.VISIBLE);
         invalidateOptionsMenu();
         loadPatients();
+        bottomNavigation.setSelectedItemId(R.id.navigation_unidentified);
     }
 
     private void setupPostSessionUI() {
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity
             runOnUiThread(() -> {
                 allPatients.clear();
                 allPatients.addAll(patientsFromDb);
-                filterPatients(FilterType.UNIDENTIFIED);
+                filterPatients(currentFilter);
             });
         });
     }
