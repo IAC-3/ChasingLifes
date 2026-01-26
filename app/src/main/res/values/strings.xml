@@ -23,6 +23,7 @@
 
     <!-- Schermata Principale (Utente) -->
     <string name="join_a_session">Unisciti a una Sessione</string>
+    <string name="enter_a_code">Inserisci un codice</string>
     <string name="identified">Identificati</string>
     <string name="unidentified">Non Identificati</string>
     <string name="missing">Dispersi</string>

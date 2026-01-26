@@ -23,6 +23,7 @@
 
     <!-- Main Screen (User) -->
     <string name="join_a_session">Join a Session</string>
+    <string name="enter_a_code">Enter a code</string>
     <string name="identified">Identified</string>
     <string name="unidentified">Unidentified</string>
     <string name="missing">Missing</string>
