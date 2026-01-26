@@ -86,7 +86,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
-                android:src="@android:drawable/ic_menu_add"
+                android:src="@drawable/ic_person_add_outline"
                 android:contentDescription="Aggiungi Contatto"/>
 
             <ImageView
@@ -94,7 +94,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
-                android:src="@android:drawable/ic_menu_search"
+                android:src="@drawable/ic_info_outline"
                 android:contentDescription="Visualizza Contatti"/>
 
         </LinearLayout>

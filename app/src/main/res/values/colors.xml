@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Palette Principale -->
+    <color name="md_theme_primary">#00658D</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#C4E7FF</color>
+    <color name="md_theme_onPrimaryContainer">#001E2D</color>
+    <color name="md_theme_secondary">#006874</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#97F0FF</color>
+    <color name="md_theme_onSecondaryContainer">#001F24</color>
+    <color name="md_theme_tertiary">#5C5D72</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#E1E0F9</color>
+    <color name="md_theme_onTertiaryContainer">#191A2C</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_onErrorContainer">#410002</color>
+
+    <!-- Sfondi e Superfici -->
+    <color name="md_theme_background">#FCFCFF</color>
+    <color name="md_theme_onBackground">#1A1C18</color>
+    <color name="md_theme_surface">#FCFCFF</color>
+    <color name="md_theme_onSurface">#1A1C18</color>
+    <color name="md_theme_surfaceVariant">#DFE2EB</color>
+    <color name="md_theme_onSurfaceVariant">#42474E</color>
+    <color name="md_theme_outline">#73777F</color>
+
+    <!-- Colori per lo stato (es. deceased) -->
+    <color name="status_deceased">#D32F2F</color>
+    <color name="status_unidentified">#FF9800</color>
+    <color name="status_identified">#4CAF50</color>
+    <color name="status_missing">#2196F3</color>
+
 </resources>

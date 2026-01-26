@@ -71,30 +71,21 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
 
         // Logica dei pulsanti
         if (listener != null) {
-            if (isOperatorView) {
-                holder.editButton.setVisibility(View.VISIBLE);
-                holder.deleteButton.setVisibility(View.VISIBLE);
-                holder.viewContactsButton.setVisibility(View.VISIBLE);
+            holder.editButton.setVisibility(isOperatorView ? View.VISIBLE : View.GONE);
+            holder.deleteButton.setVisibility(isOperatorView ? View.VISIBLE : View.GONE);
+            holder.viewContactsButton.setVisibility(isOperatorView ? View.VISIBLE : View.GONE);
+            holder.addContactButton.setVisibility(!isOperatorView ? View.VISIBLE : View.GONE);
+
+            holder.editButton.setOnClickListener(v -> listener.onEditPatient(patient));
+            holder.deleteButton.setOnClickListener(v -> listener.onDeletePatient(patient));
+            holder.viewContactsButton.setOnClickListener(v -> listener.onViewContacts(patient));
+            holder.addContactButton.setOnClickListener(v -> listener.onAddContact(patient));
+
+            if (!isOperatorView && "UNIDENTIFIED".equals(patient.getStatus())) {
+                holder.identifyButton.setVisibility(View.VISIBLE);
+                holder.identifyButton.setOnClickListener(v -> listener.onIdentifyPatient(patient));
+            } else {
                 holder.identifyButton.setVisibility(View.GONE);
-                holder.addContactButton.setVisibility(View.GONE);
-
-                holder.editButton.setOnClickListener(v -> listener.onEditPatient(patient));
-                holder.deleteButton.setOnClickListener(v -> listener.onDeletePatient(patient));
-                holder.viewContactsButton.setOnClickListener(v -> listener.onViewContacts(patient));
-            } else { // User View
-                holder.editButton.setVisibility(View.GONE);
-                holder.deleteButton.setVisibility(View.GONE);
-                holder.addContactButton.setVisibility(View.VISIBLE);
-                holder.viewContactsButton.setVisibility(View.GONE);
-
-                holder.addContactButton.setOnClickListener(v -> listener.onAddContact(patient));
-
-                if ("UNIDENTIFIED".equals(patient.getStatus())) {
-                    holder.identifyButton.setVisibility(View.VISIBLE);
-                    holder.identifyButton.setOnClickListener(v -> listener.onIdentifyPatient(patient));
-                } else {
-                    holder.identifyButton.setVisibility(View.GONE);
-                }
             }
         } else {
             holder.editButton.setVisibility(View.GONE);

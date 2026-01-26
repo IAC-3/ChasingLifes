@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:visibility="gone"
+        app:backgroundTint="@color/md_theme_surface"
         app:menu="@menu/bottom_nav_menu"
         tools:visibility="visible"/>
 
