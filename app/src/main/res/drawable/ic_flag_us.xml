@@ -1,0 +1,32 @@
+<!-- English: Icon for the United States flag.
+     Italiano: Icona per la bandiera degli Stati Uniti. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+  <path
+      android:pathData="M0,0h512v512h-512z"
+      android:fillColor="#bd3d44"/>
+  <path
+      android:pathData="M0,57.03h512v38.86h-512z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M0,134.76h512v38.86h-512z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M0,212.49h512v38.86h-512z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M0,290.22h512v38.86h-512z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M0,367.95h512v38.86h-512z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M0,445.68h512v38.86h-512z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M0,0h256v284.12h-256z"
+      android:fillColor="#192f5d"/>
+</vector>

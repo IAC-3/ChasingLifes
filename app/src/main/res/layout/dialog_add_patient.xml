@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Layout for the dialog to add or edit a patient.
+     Italiano: Layout per il dialogo per aggiungere o modificare un paziente. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,7 +8,6 @@
     android:paddingEnd="24dp"
     android:paddingTop="24dp">
 
-    <!-- Contenitore per i campi Nome/Cognome (può essere nascosto) -->
     <LinearLayout
         android:id="@+id/identified_patient_container"
         android:layout_width="match_parent"
@@ -18,23 +18,22 @@
             android:id="@+id/patient_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome" />
+            android:hint="@string/name_hint" />
 
         <EditText
             android:id="@+id/patient_surname_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android.layout_marginTop="8dp"
-            android:hint="Cognome" />
+            android:layout_marginTop="8dp"
+            android:hint="@string/surname_hint" />
     </LinearLayout>
 
-    <!-- Campo per i segni particolari (SEMPRE VISIBILE) -->
     <EditText
         android:id="@+id/distinguishing_marks_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Segni particolari" />
+        android:hint="@string/signs_label" />
 
     <EditText
         android:id="@+id/hospital_input"
@@ -48,9 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Paziente non identificato" />
+        android:text="@string/unidentified" />
 
-    <!-- Contenitore per le condizioni -->
     <LinearLayout
         android:id="@+id/conditions_container"
         android:layout_width="match_parent"
@@ -71,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Paziente deceduto" />
+        android:text="@string/deceased" />
 
     <Button
         android:id="@+id/upload_photo_button"

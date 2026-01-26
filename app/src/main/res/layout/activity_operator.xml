@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Layout for the operator activity, which displays the patient list and allows the operator to generate or join a session.
+     Italiano: Layout per l'attività dell'operatore, che visualizza l'elenco dei pazienti e consente all'operatore di generare o unirsi a una sessione. -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +20,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Contenitore pre-sessione -->
     <LinearLayout
         android:id="@+id/pre_session_container"
         android:layout_width="match_parent"
@@ -32,18 +32,17 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Generate Session" />
+            android:text="@string/generate_session" />
 
         <Button
             android:id="@+id/join_session_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Join a Session" />
+            android:text="@string/join_a_session" />
 
     </LinearLayout>
 
-    <!-- Contenitore post-sessione (invisibile di default) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/patients_recycler_view"
         android:layout_width="match_parent"

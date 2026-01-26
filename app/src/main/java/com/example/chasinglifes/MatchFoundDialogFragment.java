@@ -3,19 +3,16 @@ package com.example.chasinglifes;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class MatchFoundDialogFragment extends DialogFragment implements MatchAdapter.OnMatchClickListener {
+public class MatchFoundDialogFragment extends DialogFragment {
 
     public interface MatchFoundListener {
         void onMatchSelected(Patient existingPatient, Patient newPatientData);
@@ -23,64 +20,62 @@ public class MatchFoundDialogFragment extends DialogFragment implements MatchAda
     }
 
     private MatchFoundListener listener;
-    private List<Patient> matchList;
+    private List<Patient> matches;
     private Patient newPatientData;
 
-    public static MatchFoundDialogFragment newInstance(List<Patient> matches, Patient newPatient) {
+    // English: Creates a new instance of the fragment, passing the list of matches and the new patient data.
+    // Italiano: Crea una nuova istanza del frammento, passando l'elenco delle corrispondenze e i dati del nuovo paziente.
+    public static MatchFoundDialogFragment newInstance(List<Patient> matches, Patient newPatientData) {
         MatchFoundDialogFragment fragment = new MatchFoundDialogFragment();
         Bundle args = new Bundle();
         args.putSerializable("matches", (Serializable) matches);
-        args.putSerializable("new_patient", newPatient);
+        args.putSerializable("new_patient_data", newPatientData);
         fragment.setArguments(args);
         return fragment;
     }
 
+    // English: Attaches the listener to the fragment.
+    // Italiano: Collega il listener al frammento.
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        // L'activity che ospita il dialogo deve implementare il listener
-        if (context instanceof MatchFoundListener) {
+        try {
             listener = (MatchFoundListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement MatchFoundListener");
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement MatchFoundListener");
         }
     }
 
+    // English: Initializes the fragment, retrieving the list of matches and the new patient data.
+    // Italiano: Inizializza il frammento, recuperando l'elenco delle corrispondenze e i dati del nuovo paziente.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            matchList = (List<Patient>) getArguments().getSerializable("matches");
-            newPatientData = (Patient) getArguments().getSerializable("new_patient");
+            matches = (List<Patient>) getArguments().getSerializable("matches");
+            newPatientData = (Patient) getArguments().getSerializable("new_patient_data");
         }
     }
 
+    // English: Creates the dialog to show the list of potential matches.
+    // Italiano: Crea il dialogo per mostrare l'elenco delle potenziali corrispondenze.
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_match_found, null);
+        CharSequence[] items = new CharSequence[matches.size()];
+        for (int i = 0; i < matches.size(); i++) {
+            items[i] = matches.get(i).getName() + " " + matches.get(i).getSurname();
+        }
 
-        RecyclerView recyclerView = view.findViewById(R.id.matches_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MatchAdapter adapter = new MatchAdapter(matchList, this);
-        recyclerView.setAdapter(adapter);
-
-        view.findViewById(R.id.none_of_these_button).setOnClickListener(v -> {
-            listener.onNoneSelected(newPatientData);
-            dismiss();
-        });
-
-        builder.setView(view).setTitle("Riscontri Trovati");
+        builder.setTitle("Corrispondenza Trovata")
+                .setItems(items, (dialog, which) -> {
+                    listener.onMatchSelected(matches.get(which), newPatientData);
+                })
+                .setNegativeButton("Nessuna di queste", (dialog, id) -> {
+                    listener.onNoneSelected(newPatientData);
+                });
 
         return builder.create();
-    }
-
-    // Click su un elemento della lista
-    @Override
-    public void onMatchClicked(Patient patient) {
-        listener.onMatchSelected(patient, newPatientData);
-        dismiss();
     }
 }

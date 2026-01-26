@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChasingLifes</string>
+
+    <!-- Login Screen -->
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="user_type_prompt">Select user type</string>
+    <string name="register_as_operator">Register as operator</string>
+    <string-array name="user_types_array">
+        <item>User</item>
+        <item>Operator</item>
+    </string-array>
+    <string name="login_failed">Invalid credentials.</string>
+    <string name="registration_successful">Registration successful!</string>
+    <string name="user_already_exists">User already exists.</string>
+
+    <!-- Titles -->
+    <string name="title_user">USER: %1$s</string>
+    <string name="title_operator">OPERATOR: %1$s</string>
+
+    <!-- Main Screen (User) -->
+    <string name="join_a_session">Join a Session</string>
+    <string name="identified">Identified</string>
+    <string name="unidentified">Unidentified</string>
+    <string name="missing">Missing</string>
+    <string name="deceased">Deceased</string>
+    <string name="add_missing_person">Report Missing Person</string>
+    <string name="profile">Profile</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="search_hint">Search by name, surname…</string>
+    <string name="confirm_delete_account_title">Confirm Deletion</string>
+    <string name="confirm_delete_account_message">Are you sure you want to delete your account? This action is irreversible.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="account_deleted_successfully">Account deleted successfully.</string>
+    <string name="add_contact">Add Contact</string>
+    <string name="add_contact_role_hint">Role (e.g., Wife)</string>
+    <string name="add_contact_name_hint">Full Name (e.g., Gina Rossi)</string>
+    <string name="add_contact_contact_hint">Contact (e.g., 3456789001)</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="contact_added">Contact added.</string>
+    <string name="no_contacts_available">No contacts available.</string>
+    <string name="contacts_for">Contacts for %1$s</string>
+    <string name="patient_fallback">patient</string>
+    <string name="joined_session">Joined session %1$s</string>
+    <string name="invalid_session_code">Invalid session code.</string>
+    <string name="session_room_title">Room: %1$s</string>
+    <string name="missing_person_added">Missing person added.</string>
+    <string name="identify_patient_title">Identify Patient</string>
+    <string name="name_hint">Name</string>
+    <string name="surname_hint">Surname</string>
+    <string name="identify_button">Identify</string>
+    <string name="signs_label">Signs</string>
+    <string name="inserted_by_label">Inserted by</string>
+    <string name="session_code_hint">Code</string>
+    <string name="join">Join</string>
+
+    <!-- Operator Screen -->
+    <string name="generate_session">Generate Session</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="edit_patient">Edit Patient</string>
+    <string name="confirm_delete_patient_title">Confirm Deletion</string>
+    <string name="confirm_delete_patient_message">Are you sure?</string>
+    <string name="session_created">Session %1$s created!</string>
+    <string name="patient_updated">Patient updated!</string>
+    <string name="patient_added">Patient added!</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_title">ChasingLifes Beta</string>
+    <string name="continue_button">Continue</string>
+
+    <!-- Default Template Strings -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus mi nec purus. Fusce varius vel magna ac vestibulum. Nam perferendis lorem, id aliquam sapien. Integer nec dictum elit. Quisque libero metus, eleifend in dictum at, commodo nec tortor. Etiam mollis ultricies consequat. Ut accumsan triviale, id luctussed.</string>
+
+</resources>

@@ -1,5 +1,6 @@
 package com.example.chasinglifes;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,13 +26,19 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     private final List<Patient> patientList;
     private final PatientAdapterListener listener;
     private final boolean isOperatorView;
+    private final Context context;
 
-    public PatientAdapter(List<Patient> patientList, PatientAdapterListener listener, boolean isOperatorView) {
+    // English: Constructor for the adapter.
+    // Italiano: Costruttore per l'adattatore.
+    public PatientAdapter(List<Patient> patientList, PatientAdapterListener listener, boolean isOperatorView, Context context) {
         this.patientList = patientList;
         this.listener = listener;
         this.isOperatorView = isOperatorView;
+        this.context = context;
     }
 
+    // English: Creates a new ViewHolder when the RecyclerView needs one.
+    // Italiano: Crea un nuovo ViewHolder quando il RecyclerView ne ha bisogno.
     @NonNull
     @Override
     public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,29 +46,30 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         return new PatientViewHolder(view);
     }
 
+    // English: Binds the data to the ViewHolder for a specific item.
+    // Italiano: Collega i dati al ViewHolder for a specific item.
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
         Patient patient = patientList.get(position);
 
-        // Logica di visualizzazione
         StringBuilder topLineBuilder = new StringBuilder();
         if (!TextUtils.isEmpty(patient.getName()) || !TextUtils.isEmpty(patient.getSurname())) {
             topLineBuilder.append(patient.getName()).append(" ").append(patient.getSurname());
         }
         if (!TextUtils.isEmpty(patient.getDistinguishingMarks())) {
             if (topLineBuilder.length() > 0) topLineBuilder.append("\n");
-            topLineBuilder.append("Segni: ").append(patient.getDistinguishingMarks());
+            topLineBuilder.append(context.getString(R.string.signs_label)).append(": ").append(patient.getDistinguishingMarks());
         }
         holder.patientNameOrMarks.setText(topLineBuilder.toString());
 
         if (patient.isDeceased()) {
-            holder.patientConditions.setText("Deceduto");
+            holder.patientConditions.setText(R.string.deceased);
         } else {
             holder.patientConditions.setText(patient.getConditions());
         }
 
         if (!isOperatorView && patient.getOperatorUsername() != null) {
-            holder.operatorUsername.setText("Inserito da: " + patient.getOperatorUsername());
+            holder.operatorUsername.setText(context.getString(R.string.inserted_by_label) + ": " + patient.getOperatorUsername());
             holder.operatorUsername.setVisibility(View.VISIBLE);
         } else {
             holder.operatorUsername.setVisibility(View.GONE);
@@ -69,7 +77,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
 
         holder.patientPhoto.setImageResource(R.mipmap.ic_launcher);
 
-        // Logica dei pulsanti
         if (listener != null) {
             holder.editButton.setVisibility(isOperatorView ? View.VISIBLE : View.GONE);
             holder.deleteButton.setVisibility(isOperatorView ? View.VISIBLE : View.GONE);
@@ -96,9 +103,13 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         }
     }
 
+    // English: Returns the total number of items in the list.
+    // Italiano: Restituisce il numero totale di elementi nella lista.
     @Override
     public int getItemCount() { return patientList.size(); }
 
+    // English: ViewHolder for a patient item.
+    // Italiano: ViewHolder per un elemento paziente.
     static class PatientViewHolder extends RecyclerView.ViewHolder {
         ImageView patientPhoto, editButton, deleteButton, identifyButton, addContactButton, viewContactsButton;
         TextView patientNameOrMarks, patientConditions, operatorUsername;

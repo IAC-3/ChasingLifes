@@ -16,11 +16,9 @@ import androidx.fragment.app.DialogFragment;
 
 import java.io.Serializable;
 
-// Questo dialogo ha UNA SOLA RESPONSABILITÀ: raccogliere i dati e passarli all'activity.
 public class AddPatientDialogFragment extends DialogFragment {
 
     public interface AddPatientDialogListener {
-        // Il listener ora passa l'oggetto Patient costruito
         void onPatientDataCollected(Patient patientData, boolean isEditMode);
     }
 
@@ -28,6 +26,8 @@ public class AddPatientDialogFragment extends DialogFragment {
     private Patient patientToEdit;
     private View view;
 
+    // English: Creates a new instance of the fragment, passing patient data if in edit mode.
+    // Italiano: Crea una nuova istanza del frammento, passando i dati del paziente se in modalità di modifica.
     public static AddPatientDialogFragment newInstance(String sessionCode, String operatorUsername, Patient patient) {
         AddPatientDialogFragment fragment = new AddPatientDialogFragment();
         Bundle args = new Bundle();
@@ -40,12 +40,16 @@ public class AddPatientDialogFragment extends DialogFragment {
         return fragment;
     }
 
+    // English: Attaches the listener to the fragment.
+    // Italiano: Collega il listener al frammento.
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         listener = (AddPatientDialogListener) context;
     }
 
+    // English: Initializes the fragment, retrieving patient data if in edit mode.
+    // Italiano: Inizializza il frammento, recuperando i dati del paziente se in modalità di modifica.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,8 @@ public class AddPatientDialogFragment extends DialogFragment {
         }
     }
 
+    // English: Creates the dialog for adding or editing a patient.
+    // Italiano: Crea il dialogo per aggiungere o modificare un paziente.
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -68,17 +74,18 @@ public class AddPatientDialogFragment extends DialogFragment {
         }
 
         builder.setView(view)
-                .setTitle(isEditMode ? "Modifica Paziente" : "Aggiungi Paziente")
-                .setPositiveButton(isEditMode ? "Salva" : "Avanti", (dialog, id) -> {
-                    // Costruisce l'oggetto e lo passa all'activity
+                .setTitle(isEditMode ? R.string.edit_patient : R.string.add_patient)
+                .setPositiveButton(isEditMode ? R.string.save : R.string.next, (dialog, id) -> {
                     Patient patientData = buildPatientFromInput(isEditMode);
                     listener.onPatientDataCollected(patientData, isEditMode);
                 })
-                .setNegativeButton("Annulla", null);
+                .setNegativeButton(R.string.cancel, null);
 
         return builder.create();
     }
 
+    // English: Builds a Patient object from the input fields.
+    // Italiano: Costruisce un oggetto Patient dai campi di input.
     private Patient buildPatientFromInput(boolean isEditMode) {
         final Patient p = isEditMode ? patientToEdit : new Patient();
         if (!isEditMode) {
@@ -101,6 +108,8 @@ public class AddPatientDialogFragment extends DialogFragment {
         return p;
     }
 
+    // English: Populates the input fields with the patient's data when in edit mode.
+    // Italiano: Popola i campi di input con i dati del paziente quando in modalità di modifica.
     private void populateFields() {
         ((EditText) view.findViewById(R.id.patient_name_input)).setText(patientToEdit.getName());
         ((EditText) view.findViewById(R.id.patient_surname_input)).setText(patientToEdit.getSurname());
@@ -115,6 +124,8 @@ public class AddPatientDialogFragment extends DialogFragment {
         view.findViewById(R.id.conditions_container).setVisibility(decCheckbox.isChecked() ? View.GONE : View.VISIBLE);
     }
 
+    // English: Sets up the listeners for the checkboxes to show or hide fields dynamically.
+    // Italiano: Imposta i listener per le checkbox per mostrare o nascondere i campi dinamicamente.
     private void setupCheckboxListeners() {
         final LinearLayout identifiedContainer = view.findViewById(R.id.identified_patient_container);
         final CheckBox unidentCheckbox = view.findViewById(R.id.unidentified_checkbox);

@@ -15,9 +15,11 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
 
+    // English: Creates and returns the view hierarchy associated with the fragment.
+    // Italiano: Crea e restituisce la gerarchia delle viste associata al frammento.
     @Override
     public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
+            LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -26,15 +28,22 @@ public class FirstFragment extends Fragment {
 
     }
 
+    // English: Called immediately after onCreateView() has returned, but before any saved state has been restored in to the view.
+    // Italiano: Chiamato subito dopo che onCreateView() è tornato, ma prima che qualsiasi stato salvato sia stato ripristinato nella vista.
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(v ->
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment)
-        );
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
     }
 
+    // English: Called when the view previously created by onCreateView() has been detached from the fragment.
+    // Italiano: Chiamato quando la vista precedentemente creata da onCreateView() è stata scollegata dal frammento.
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Layout for the main activity, which displays the patient list and bottom navigation.
+     Italiano: Layout per l'attività principale, che visualizza l'elenco dei pazienti e la navigazione inferiore. -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,7 +19,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Contenitore pre-sessione -->
     <LinearLayout
         android:id="@+id/pre_session_container"
         android:layout_width="match_parent"
@@ -30,11 +30,10 @@
             android:id="@+id/join_session_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Join a Session" />
+            android:text="@string/join_a_session" />
 
     </LinearLayout>
 
-    <!-- Contenitore post-sessione (invisibile di default) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/patients_recycler_view"
         android:layout_width="match_parent"
@@ -52,7 +51,5 @@
         app:backgroundTint="@color/md_theme_surface"
         app:menu="@menu/bottom_nav_menu"
         tools:visibility="visible"/>
-
-    <!-- FAB RIMOSSO -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

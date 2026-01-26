@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Menu for the bottom navigation bar.
+     Italiano: Menu per la barra di navigazione inferiore. -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_identified"
         android:icon="@drawable/ic_person_check"
-        android:title="Identificati" />
+        android:title="@string/identified" />
     <item
         android:id="@+id/navigation_unidentified"
         android:icon="@drawable/ic_help_outline"
-        android:title="Non Identificati" />
+        android:title="@string/unidentified" />
     <item
         android:id="@+id/navigation_missing"
         android:icon="@drawable/ic_warning"
-        android:title="Dispersi" />
+        android:title="@string/missing" />
     <item
         android:id="@+id/navigation_deceased"
         android:icon="@drawable/ic_cross"
-        android:title="Deceduti" />
+        android:title="@string/deceased" />
 </menu>

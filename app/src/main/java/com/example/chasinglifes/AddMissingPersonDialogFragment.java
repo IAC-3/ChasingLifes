@@ -20,6 +20,8 @@ public class AddMissingPersonDialogFragment extends DialogFragment {
 
     private AddMissingPersonListener listener;
 
+    // English: Attaches the listener to the fragment.
+    // Italiano: Collega il listener al frammento.
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -30,6 +32,8 @@ public class AddMissingPersonDialogFragment extends DialogFragment {
         }
     }
 
+    // English: Creates the dialog for adding a missing person.
+    // Italiano: Crea il dialogo per aggiungere una persona scomparsa.
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -42,13 +46,14 @@ public class AddMissingPersonDialogFragment extends DialogFragment {
         final EditText marksInput = view.findViewById(R.id.missing_person_marks_input);
 
         builder.setView(view)
-                .setPositiveButton("Aggiungi", (dialog, id) -> {
+                .setTitle(R.string.add_missing_person)
+                .setPositiveButton(R.string.save, (dialog, id) -> {
                     String name = nameInput.getText().toString().trim();
                     String surname = surnameInput.getText().toString().trim();
                     String marks = marksInput.getText().toString().trim();
                     listener.onMissingPersonAdded(name, surname, marks);
                 })
-                .setNegativeButton("Annulla", null);
+                .setNegativeButton(R.string.cancel, null);
 
         return builder.create();
     }

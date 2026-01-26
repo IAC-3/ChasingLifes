@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Menu for the operator activity.
+     Italiano: Menu per l'attività dell'operatore. -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_add_patient"
         android:icon="@android:drawable/ic_input_add"
-        android:title="Aggiungi Paziente"
+        android:title="@string/add_patient"
         app:showAsAction="ifRoom" />
 </menu>

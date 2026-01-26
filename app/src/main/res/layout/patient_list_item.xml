@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Layout for a single item in the patient list.
+     Italiano: Layout per un singolo elemento nell'elenco dei pazienti. -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -39,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp" />
 
-            <!-- NUOVO CAMPO PER L'OPERATORE -->
             <TextView
                 android:id="@+id/patient_operator_username"
                 android:layout_width="wrap_content"
@@ -50,7 +50,6 @@
 
         </LinearLayout>
 
-        <!-- Contenitore per le azioni -->
         <LinearLayout
             android:id="@+id/actions_container"
             android:layout_width="wrap_content"
@@ -63,7 +62,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@android:drawable/ic_menu_edit"
-                android:contentDescription="Modifica Paziente"/>
+                android:contentDescription="@string/edit_patient"/>
 
             <ImageView
                 android:id="@+id/delete_patient_button"
@@ -71,7 +70,7 @@
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
                 android:src="@android:drawable/ic_menu_delete"
-                android:contentDescription="Cancella Paziente"/>
+                android:contentDescription="@string/delete_account"/>
 
             <ImageView
                 android:id="@+id/identify_patient_button"
@@ -79,7 +78,7 @@
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
                 android:src="@android:drawable/ic_menu_myplaces"
-                android:contentDescription="Identifica Paziente"/>
+                android:contentDescription="@string/identify_patient_title"/>
 
             <ImageView
                 android:id="@+id/add_contact_button"
@@ -87,7 +86,7 @@
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_person_add_outline"
-                android:contentDescription="Aggiungi Contatto"/>
+                android:contentDescription="@string/add_contact"/>
 
             <ImageView
                 android:id="@+id/view_contacts_button"
@@ -95,7 +94,7 @@
                 android:layout_height="32dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_info_outline"
-                android:contentDescription="Visualizza Contatti"/>
+                android:contentDescription="@string/contacts_for"/>
 
         </LinearLayout>
 

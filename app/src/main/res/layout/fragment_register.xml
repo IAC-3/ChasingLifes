@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- English: Layout for the register fragment, which allows the user to create a new account.
+     Italiano: Layout per il frammento di registrazione, che consente all'utente di creare un nuovo account. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registrazione"
+        android:text="@string/register"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
@@ -20,14 +21,14 @@
         android:id="@+id/username_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Scegli un Username" />
+        android:hint="@string/username" />
 
     <EditText
         android:id="@+id/password_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Scegli una Password"
+        android:hint="@string/password"
         android:inputType="textPassword" />
 
     <CheckBox
@@ -35,21 +36,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Registra come Operatore" />
+        android:text="@string/register_as_operator" />
 
     <Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Conferma Registrazione" />
+        android:text="@string/register" />
 
     <TextView
         android:id="@+id/go_to_login_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Hai già un account? Accedi"
+        android:text="@string/login"
         android:textColor="?attr/colorPrimary" />
 
 </LinearLayout>
